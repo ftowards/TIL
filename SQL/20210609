@@ -1,4 +1,5 @@
 Q. Binary Tree Nodes
+https://www.hackerrank.com/challenges/binary-search-tree-1/problem
 
   You are given a table, BST, containing two columns: N and P, where N represents the value of a node in Binary Tree, and P is the parent of N.
 
@@ -33,3 +34,41 @@ A.
       on a.n = b.p)
   where num is not null
   order by num;
+
+
+
+
+select table2.submission_date, table2.Unique_Count, table1.hacker_id , hackers.name from hackers, 
+( select * from 
+  ( select submission_date, hacker_id ,row_number() over (partition by submission_date order by count desc, hacker_id asc) RN from 
+    ( select submission_date, hacker_id, count(*) as count from submissions group by submission_date,hacker_id having count(*) >= 1 order by submission_date)) 
+   where RN = 1) table1, 
+( select * from (SELECT submission_date, COUNT(DISTINCT hacker_id) Unique_Count FROM 
+  (SELECT a.submission_date, v.hacker_id, COUNT(DISTINCT v.submission_date) cnt FROM 
+    ( SELECT DISTINCT submission_date FROM Submissions ORDER BY 1 )A, submissions v WHERE v.submission_date <= a.submission_date GROUP BY a.submission_date, v.hacker_id ) 
+  WHERE TO_CHAR(submission_date,'DD') = cnt GROUP BY submission_date ORDER BY 1)) table2 
+where hackers.hacker_id = table1.hacker_id and table1.submission_date = table2.submission_date order by table1.submission_date;
+
+
+
+SELECT A.SUBMISSION_DATE, A.CNT, A.HACKER_ID, B.NAME FROM (
+    SELECT SUBMISSION_DATE, COUNT(SUBMISSION_ID) as CNT, RANK() OVER (PARTITION BY SUBMISSION_DATE ORDER BY SUM(SCORE) DESC, HACKER_ID ASC) AS RANK, HACKER_ID FROM SUBMISSIONS GROUP BY SUBMISSION_DATE, HACKER_ID) A
+    JOIN HACKERS B ON A.HACKER_ID = B.HACKER_ID
+WHERE RANK = 1 ORDER BY A.SUBMISSION_DATE;
+
+
+2016-03-01 3 81314 Denise
+2016-03-02 2 99789 Joshua
+2016-03-03 2 91573 Cynthia
+2016-03-04 2 72783 Dennis
+2016-03-05 2 83643 Earl
+2016-03-06 4 84307 Evelyn
+2016-03-07 2 64823 Bruce
+2016-03-08 2 44690 Christina
+2016-03-09 3 95648 Charles
+2016-03-10 2 75908 Rebecca
+2016-03-11 2 3178 Melissa
+2016-03-12 2 10068 Matthew
+2016-03-13 1 30073 Harry
+2016-03-14 3 74861 Fred
+2016-03-15 2 80648 Michael
