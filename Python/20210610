@@ -1,0 +1,68 @@
+Python 2회차
+
+  판다스
+    10분 완성 매뉴얼 : https://pandas.pydata.org/docs/user_guide/10min.html
+    치트 시트 : https://pandas.pydata.org/Pandas_Cheat_Sheet.pdf
+    
+  라이브러리 import
+    import pandas as '별칭'
+    
+  1. 데이터 프레임 기본 사용
+    1-1. 데이터 프레임 생성
+      변수 = pd.DataFrame()
+      
+    1-2. 컬럼 추가하기
+      df['Column'] = [A, B, C, D, ...]
+      df['Column'] = 12412 / 전체 항목이 같은 값으로 채워짐
+      
+    1-3. 컬럼 호출하기
+      df['Column'] / 'Column' 컬럼 호출 >> series / 벡터형
+      df[['Column']] / 'Column' 컬럼 호출 >> dataframe / 데이터프레임형
+      
+      df['Column'].tolist() >> list 형으로 호출
+      
+    1-4. 컬럼 삭제하기
+      df.drop(['Column', 'Column2'...], axis = 1(컬럼))
+      
+  2. 데이터 요약하기
+    2-1. df.info() : DF 정보
+    2-2. df.shape : DF 사이즈 / (행, 열)
+    2-3. df.dtypes : 행열 타입
+    2-4. df.describe() : 기술 통계량
+        df.describe(include = 'object') >> 범주형 데이터의 요약값
+    
+  3. 데이터 가져오기
+     df['Column'] / 'Column' 컬럼 호출 >> series / 벡터형
+     df[['Column', 'Column2']] / 'Column' 컬럼 호출 >> dataframe / 데이터프레임형
+     
+     df.loc[index] : 인덱스 번호에 맞는 행 가져오기
+     df.loc[n:m] : n ~ m-1 까지 행 정보 가져오기
+     
+     df.loc[row , col] : row행 / col 열 정보 가져오기
+     df.loc[[row1, row2], [col1, col2]] : 다중 row / col 정보 가져오기
+     
+  4. 데이터 검색하기
+     df[df['Col'] 조건]
+                 .str.contains("search")]
+                 = < > ....]
+     
+     df[(df['Col'] 조건) & / | (df['Col'] 조건2)] : 다중 조건 검색
+ 
+  5. Groupby
+     df.groupby("기준")....
+     기준 별로 그룹화
+      
+     통계량 
+      .mean() 평균
+      .median() 중앙값
+      .std() 표준편차
+      .agg(['mean', 'std']) 다중 통계량
+      
+  6. Plot
+     sns.countplot : 막대 그래프
+     sns.barplot : 막대 그래프 가로세로 가능
+     sns.boxplot : 박스 그림
+     sns.violinplot : 바이올린 그림 / 박스 그림과 다르게 분포를 반영
+     sns.scatterplot : 산점도
+     sns.regplot : 회귀곡선
+     sns.lmplot : 회귀선
