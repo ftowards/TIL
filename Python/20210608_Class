@@ -1,0 +1,47 @@
+Python 1회차
+
+  1. 데이터형
+    Boolean : True 1 / False 0  연산 가능
+    숫자 : Int, Float 연산 가능
+    문자 : str
+    list : 배열
+    dict : key / value 한 쌍으로 저장
+  
+  2. 변수
+    __변수명__ = ___값___
+    변수의 지정
+    변수명 : 숫자로 시작할 수 없다. 특수문자는 _ 만 사용
+    
+  3. 문자열 함수
+    .lower() : 소문자로 변환
+    .upper() : 대문자로 변환
+    .strip('') : '기준' 으로 문자열 분할 / 기본은 공백
+    
+    인덱싱 / 슬라이싱
+      인덱싱[n] : 0 ~ n-1 까지 / -1 ~ -(n-1) 역순
+      슬라이싱[a:b] : a 포함 ~ b 전까지
+      
+  4. List 리스트
+    list.append('dfad') : 리스트에 항목 추가
+    list.remove('adfa') : 리스트에서 항목 제거
+    
+    'adfa' in list : 리스트에 'adfa' 포함 여부 확인
+    
+    len : 리스트 원소 개수 / 문자열 길이
+    
+  5. Dict 딕셔너리
+    dict = {'key' : 'value',
+            'key2' : 'value'...}
+    
+  6. for 문
+    for _a__ in range(n) / list 등 집합 :
+        반복
+  
+    for _i_ , _s_ in enumerate(list) :
+        i / index
+        s / 원소
+    
+  7. 함수의 정의
+    def __함수명(변수1, 변수2) :
+        구문
+        return 반환값
