@@ -1,0 +1,56 @@
+SQL 2회차
+
+  1. 테이블
+    - 테이블 생성하기
+      create Table ____ (
+          Col 데이터형 null여부 제약조건,
+          Col 데이터형 null여부 제약조건,
+          Col 데이터형 null여부 제약조건
+      )
+    - 테이블 수정하기
+      ALTER TABLE ____ ADD _____
+                       MODIFY _____
+                       DROP COLUMN _____
+    - 테이블 삭제하기
+      DROP TABLE _____
+      
+  2. SELECT 문
+    - SELECT __A__ FROM __Table__
+      A
+        * : 테이블의 전체 컬럼
+        COL : 해당 컬럼
+        __ AS 'ALIAS' : 결과를 별칭('ALIAS')로 출력
+    
+    - WHERE 조건문
+      WHERE __COL__ 조건1 AND(OR) 조건2 ....
+      (비교 / 부등 연산자) 조건 : 기본
+      Like '%A%' : A 를 포함하는 문자열
+      IN (A,B,C,D) : A B C D 를 포함하는 ...
+      
+    - ORDER BY 절
+      ORDER BY __COL__ ASC, __COL2__ DESC
+      ASC / 오름차순, 생략 가능
+      DESC / 내림차순
+      COL, COL... SELECT 한 컬럼 순으로 1,2,3.. 치환해서 사용 가능
+      
+    - CASE 절
+    
+      단순형
+        SELECT COUNTRY_ID, COUNTRY_NAME, 
+            CASE REGION_ID
+                WHEN 1 THEN '유럽'
+                WHEN 2 THEN '아메리카'
+                WHEN 3 THEN '아시아'
+                WHEN 4 THEN '중동 및 아프리카'
+            END AS REGION_NAME
+        FROM COUNTRIES;
+
+      검색형
+        SELECT EMPLOYEE_ID, FIRST_NAME, LAST_NAME, SALARY, JOB_ID,
+            CASE 
+                WHEN SALARY BETWEEN 1 AND 5000 THEN '낮음'
+                WHEN SALARY BETWEEN 5001 AND 10000 THEN '중간'
+                WHEN SALARY BETWEEN 10001 AND 15000 THEN '높음'
+                ELSE '최상위'
+            END SALARY_RANK
+        FROM EMPLOYEES;
