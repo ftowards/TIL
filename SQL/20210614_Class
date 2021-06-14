@@ -1,0 +1,158 @@
+SQL 3회차
+
+  함수
+    3회차
+
+1. 숫자형 함수
+  ABS(n) : 절대값 반환
+  SELECT ABS(-10) FROM DUAL;
+
+  CEIL(n) : 올림
+  SELECT CEIL(4.5) FROM DUAL;
+
+  FLOOR(n) : 내림
+  SELECT FLOOR(5.6) FROM DUAL;
+
+  EXP(n) : e 의 n 승 반환
+  SELECT EXP(3) FROM DUAL;
+
+  LN(n) : n의 자연로그 값을 반환
+  SELECT LN(5) FROM DUAL;
+
+  LOG(n2, n1) : n2 는 밑, n1 은 진수
+  SELECT LOG(100,1000000) FROM DUAL;
+
+  MOD(n2, n1) : n2/ n1 의 나머ㅣㅈ
+  SELECT MOD(21,4) FROM DUAL;
+
+  POWER(n2, n1) : n2 의 n1 승
+  SELECT POWER(3,6) FROM DUAL;
+
+  ROUND(n, i) :  n 의 소수점 i 번째 자리로 반올림
+  SELECT ROUND(4.221, 2) FROM DUAL;
+
+  SIGN(n) : 양수 음수 0 판별
+  SELECT SIGN(-124) FROM DUAL;
+
+  SQRT(n) : n 의 제곱근
+  SELECT SQRT(10000) FROM DUAL;
+
+  TRUNC(n1, n2) : n1 의 소수점 기준 n2 자리에서 절사
+  SELECT TRUNC(2.124, 2) FROM DUAL;
+
+
+2. 문자형 함수
+
+  CONCAT(chr1, chr2) : 문자 결합
+  SELECT CONCAT('문자열', '결합') FROM DUAL;
+
+  INITCAP(chr) : 첫글자를 대문자로
+  SELECT INITCAP('captin america') FROM DUAL;
+
+  LOWER(chr) : 문자열 소문자화
+  SELECT LOWER('CAPITAL') FROM DUAL;
+
+  UPPER(chr) : 문자열 대문자화
+  SELECT UPPER('capital') FROM DUAL;
+
+  LPAD(expr1, n, expr2) : expr1 을 반환할 때 n 만큼 왼쪽을 expr2 로 채워서 반환
+  SELECT LPAD('SQL', 5, '*') FROM DUAL;
+
+  RPAD(expr1, n, expr2) : expr1 을 반환할 때 n 만큼 오른쪽을 expr2 로 채워서 반환
+  SELECT RPAD('SQL', 5, '*') FROM DUAL;
+
+  LTRIM(expr1, expr2) : expr1 의 왼쪽에서 expr2 를 제거한 결과를 반환
+  SELECT LTRIM('**SQL**', '*') FROM DUAL;
+
+  RTRIM(expr1, expr2) : expr1 의 오른쪽쪽에서 expr2 를 제거한 결과를 반환
+  SELECT RTRIM('**SQL**', '*') FROM DUAL;
+
+  SUBSTR(chr, n1, n2) : chr 에서 n1 부터 n2 개의 글자를 잘라서 반환
+  SELECT SUBSTR('ABCDEFGHIJKLMN', 3,4) FROM DUAL;
+
+  TRIM(chr) : chr 의 양쪽 끝 공백을 제거
+  SELECT TRIM(' AFA DFA ') FROM DUAL;
+
+  ASCII(chr) : chr 의 ASCII 코드 값을 반환
+  SELECT ASCII('D') FROM DUAL;
+
+  LENGTH(chr) : chr 의 글자 수 반환
+  SELECT LENGTH('ADFAFDF') FROM DUAL;
+
+  LENGTHB(chr) : 문자의 바이트수 반환
+  SELECT LENGTHB('DAFADF') FROM DUAL;
+
+  REPLACE(chr, serch_str, rep_str) : chr 에서 search_str 을 찾아서 rep_chr 로 대체
+  SELECT REPLACE('ABCD', 'A','Z') FROM DUAL;
+
+  INSTR(chr1, chr2, n1, n2) : chr1에서 chr2 를 찾아 그 시작 위치 반환 / n1 번째 부터 검색 , n2 번째 문자 반환
+  SELECT INSTR('ABCDAFG', 'A' , 1, 2) FROM DUAL;
+
+
+3. 날짜형 함수
+
+  SYSDATE : 컴퓨터 시스템 시간
+  SELECT SYSDATE FROM DUAL;
+
+  ADD_MONTHS(date , n) : date 날짜에서 n 개월을 더한 날짜를 반환
+  SELECT ADD_MONTHS('2021-06-14', 2) FROM DUAL;
+
+  MONTHS_BETWEEN(date1, date2) : date1 ~ date2 까지 개월 수 반환 1>2 양수
+  SELECT MONTHS_BETWEEN('2021-09-02', '2021-06-21') FROM DUAL;
+
+  LAST_DAY(date) : date 가 속한 달의 마지막 일자 반환
+  SELECT LAST_DAY(SYSDATE) FROM DUAL;
+
+  NEXT_DAY(date, expr) : date 날짜에서 expr 날빠 반환
+  SELECT NEXT_DAY(SYSDATE, '수요일') FROM DUAL;
+
+  ROUND(date, format) : date 를 format 기준으로 반올림한 날짜 반환
+  SELECT ROUND(SYSDATE, 'DD') FROM DUAL;
+
+  TRUNC(date, format) : date 를 format 기준으로 잘라낸 날짜 반환
+  SELECT TRUNC(SYSDATE, 'MM') FROM DUAL;
+
+
+4. 형변환
+  TO_NUMBER(chr) : chr >> 숫자
+  SELECT TO_NUMBER('123123') FROM DUAL;
+
+  TO_CHAR(n, number_format) : n 을 format 에 맞게 변경
+  SELECT TO_CHAR(213141, '999,999') FROM DUAL;
+
+  TO_CHAR(date, date_format) : 
+  SELECT TO_CHAR(SYSDATE, 'YYYY-MM-DD HH24:MI:SS') FROM DUAL;
+
+  TO_DATE(char, date_format) :
+  SELECT TO_DATE('2020-12-23 21:32:22', 'YYYY-MM-DD HH24:MI:SS') FROM DUAL;
+
+  4-1. 숫자 FORMAT
+    , 자리수 / 0 소수점 / 9 숫자 한 자리
+
+  4-2. 날짜 형식
+    YYYY / YYY / YY / Y 연도 표기
+    MONTH, MON 월 표기
+    MM / 월 숫자 표기
+    D / 요일을 숫자로 표기 1 일요일
+    DAY / 주중 일자를 요일로 표시
+    DD / 일자
+    DD / 365 일 기준 일자 표기
+    DL / 일을 요일까지 표기
+    HH / HH12 12시간 표기
+    HH24 24시간 표기
+    MI 분
+    SS 초
+    WW 일년 중 주차
+    W 월 간 주차
+
+
+5. Null 처리 함수
+
+  NVL(expr1, expr2) : expr1 이 Null 이면 expr2 반환
+  NVL2(expr1, expr2, expr3) : expr1 이 Null 이면 expr3 반환, 아니면 expr2 반환
+  COALESCE(expr1, expr2,....) : 가장 처음 Null 이 아닌 값 반환
+  NULLIF(expr1, expr2) : expr1 , expr2 가 같으면 Null, 아니면 expr1 반환
+
+  DECODE(expr1, val1, result1, val2, result2, val3......, default_value)
+      expr1 값이 val1 이면 result1 / val2 이면 result2
+      else 시 default_value
