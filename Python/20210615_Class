@@ -1,0 +1,37 @@
+Python 3회차
+
+  판다스 사용하기
+  
+  * 데이터셋 불러오기
+  
+  * 데이터 요약하기
+  
+  * 데이터 분할하기
+  
+  * 결측치 확인
+  
+  * 기술 통계
+  
+  * 수치형 변수 확인
+    - 비대칭도 (왜도)
+      df.skew()
+    - 첨도
+      df.kurt()
+    - kde plot * 2 >> violinplot
+    - 회귀 시각화
+      regplot()
+    - 잔차 시각화
+      residplot()
+    - sns.pairplot()  ==  pd.histplot()
+    - lineplot / relplot
+    - heatmap 상관관계 시각화
+    
+  * 범주형 변수
+    - nunique() 유일값의 빈도수
+    - countplot() 빈도수 시각화
+    - countplot( hue = ) 2개 이상의 변수 빈도수 시각화
+    - groupby / pivot_table
+    - boxplot()
+    - scatterplot() > stripplot() > swarmplot()
+    - catplot() 범주형 데이터의 서브플롯 시각화
+    
