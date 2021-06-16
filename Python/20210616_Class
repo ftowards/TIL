@@ -1,0 +1,41 @@
+Python 4회차
+
+코로나 데이터 분석하기
+
+  * 데이터 프레임 합치기
+    pd.concat(df1, df2, {axis = 0})
+      axis = 0 : 횡방향 합치기
+      aixs = 1 : 종방향 합치기
+      join = "inner" : 결측치 제외
+      
+  * 인덱스 설정
+    df.set_index("col")
+  
+  * 날짜 타입
+    변환하기
+      pd.to_datetime("col")
+      
+    datetime 조작하기
+      .dt.year
+      .dt.month
+      .dt.day
+      .dt.dayofweek 0 ~ 6 / 월 ~ 일
+      .dt.day_name 영문 요일
+      
+  * 리스트 컴프리헨션
+    [i for i in str ] 
+    >> str 을 list 로 변환
+    
+  ** 그래프에 수치 삽입
+    g = weekday_count.plot.bar(title="요일별 확진자 현황", figsize=(10,7), rot = 0)
+    for i , w in enumerate(weekday_count) :
+      g.text(i-.16 , w+40, w)
+      
+  * 기간 배열 생성
+    pd.date_range(시작일, 종료일)
+    
+  * df 에 대한 추가 옵션
+    .style.bar()
+    .style.background_gradient()
+    
+  * .unstack()
