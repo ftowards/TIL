@@ -1,0 +1,56 @@
+SQL 4회차 
+
+  집계 쿼리
+
+    Group by 절과 집계 함수를 사용한 쿼리
+
+      Group by
+        Group by 절에 명시한 컬럼/표현식 외에 select 절에 사용 불가 
+        집계함수 추가 가능
+
+      집계 함수
+        count / max / min / sum / avg / variance / stddev
+        group by 절 없으면 전체 데이터 대상
+        group by 절이 있으면 항목별로 집계
+
+        select to_char(hire_date, 'YYYY') as HIRE_YEAR
+        FROM employees
+        group by to_char(hire_date, 'YYYY');
+
+
+      Rollup / Cube
+        
+        - 부분합
+        - rollup 소계 / 1개를 그룹핑
+        - cube 소계 / group 화한 모든 경우에 대한 소계
+
+
+
+
+    집합 쿼리 / 집합연산자
+      
+      집합의 개념
+
+      Union 합집합 
+      Union all 합집합 + 중복 포함
+      Intersect 교집합
+      Minus 차집합
+
+    Select job_id from employees
+    where 1 = 1 and
+        salary between 2000 and 5000
+        order by job_id;
+
+    같은 형태의 테이블만 합칠 수 있음
+
+
+    집합연산자 사용 : 컬럼 >> 로우 / .unstack()
+      select years, gubun, '국어' subject, korean score
+          from test_score
+      union all
+      select years, gubun, '영어' subject, english score
+          from test_score
+      union all
+      select years, gubun, '수학' subject, math score
+          from test_score
+      order by 2 desc, 3;
