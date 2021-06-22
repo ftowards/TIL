@@ -1,0 +1,48 @@
+SQL 5회차
+
+1. Join
+  같은 데이터를 기준으로 두 개 이상의 테이블을 연결
+  조건 절로 결합 가능
+  ANSI 방식이 호환성이 높음
+
+ * 조건절로 join
+  select a.employee_id
+          , a.first_name || '' || a.last_name emp_names
+          , b.job_title
+          , c.department_name
+          , d.street_address
+          , d.city
+          , e.country_name
+          , f.region_name
+  from employees a
+      , jobs b
+      , departments c
+      , locations d
+      , countries e
+      , regions f
+  where 
+      a.job_id = b.job_id
+      and a.department_id = c.department_id
+      and c.location_id = d.location_id
+      and d.country_id = e.country_id
+      and e.region_id = f.region_id
+  order by 1;
+
+  * ANSI 방식으로 조인
+    select employee_id, first_name, last_name, salary, c.city 
+        from employees a
+        join departments b
+            on a.department_id = b.department_id
+        join locations c
+            on b.location_id = c.location_id
+        where a.first_name = 'David' 
+            and salary >= 6000;
+        
+2. 외부 조인
+  대부분의 조인은 내부조인이지만, 외부조인을 사용하는 경우도 발생
+  테이블 설계가 완벽하지 않기 때문
+  
+  Oracle 테이블 호출 시 (+) 붙혀서 조인 대상을 확장
+  ANSI 방식으로 OUTER JOIN
+  
+
