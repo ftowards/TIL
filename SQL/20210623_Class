@@ -1,0 +1,50 @@
+SQL 6회차
+
+서브 쿼리
+
+    위치에 따라
+        스칼라 서브쿼리
+        인라인뷰
+        중첩 서브쿼리
+        
+    스칼라 서브쿼리
+        1개의 로우만 반환
+        1개의 컬럼이나 표현식
+        Alias를 붙혀주는 것이 일반적
+        
+select a.employee_id
+    , a.first_name || a.last_name emp_name
+    , (select b.department_name from departments b
+        where a.department_id = b.department_id) dept_name
+from employees a
+order by 1;
+    , (select b.department_name from departments b
+        where a.department_id = b.department_id) dept_name
+from employees a
+order by 1;
+
+        다른 테이블에서 값을 가져옴
+        성능이 별로
+        
+
+    인라인 뷰
+    
+        하나의 테이블 역할을 함
+        별칭 필요
+        From 절에 위치
+        
+        LATERAL >> 서브 쿼리 내에서 조인 가능
+        12c 부터
+        
+    중첩 서브 쿼리
+
+
+With 절
+    인라인뷰를 설정
+    서브 쿼리 내에서 서브쿼리를 참조 가능
+    
+
+select * from employees
+fetch first 5 rows only;
+
+PIVOT
