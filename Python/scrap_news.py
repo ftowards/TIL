@@ -1,37 +1,18 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# In[1]:
-
-
 import pandas as pd
 import requests
 from bs4 import BeautifulSoup as bs
 import time
 import datetime
-
-
-# In[2]:
-
-
 import FinanceDataReader as fdr
-
-
-# In[3]:
 
 
 url = "https://finance.naver.com/item/news_news.nhn"
 headers = {"user-agent" : "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.101 Safari/537.36"}    
 
-
-# In[4]:
-
-
 df_krx = fdr.StockListing("KRX")
-
-
-# In[5]:
-
 
 def item_name_search(item_code) :
     name = df_krx.loc[df_krx["Symbol"] == item_code, 'Name'].tolist()
@@ -39,10 +20,6 @@ def item_name_search(item_code) :
         return name[0]
     else :
         return False
-
-
-# In[6]:
-
 
 def article_page_scrap(item_code, page, date) :
     """
@@ -63,10 +40,6 @@ def article_page_scrap(item_code, page, date) :
             article_raw = article_raw.drop(i)
     
     return article_raw
-
-
-# In[7]:
-
 
 def article_scrap(item_code, date) : 
     """
@@ -97,23 +70,9 @@ def article_scrap(item_code, date) :
     file_name = f'{item_code}_{item_name}_{datetime.datetime.today().strftime("%y%m%d")}.csv' 
     articles.to_csv(file_name, index=False)    
 
+    
 
-# In[10]:
-
-
-item_code = '066570'
-
-article_scrap(item_code, '20210618')
-
-
-# In[9]:
-
-
-pd.read_csv("066570_LG전자_210624.csv")
-
-
-# In[ ]:
-
-
-
-
+    
+# item_code = '066570'
+# article_scrap(item_code, '20210618')
+# pd.read_csv("066570_LG전자_210624.csv")
