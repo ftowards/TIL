@@ -1,0 +1,39 @@
+Python 6회차
+
+FinanceDataReader
+
+금융데이터 수집 라이브러리
+
+ 설치 
+  !pip install -U finance-datareader
+ 
+ 상장 종목 전체 가져오기
+  .StockListing()
+    # KRX : KRX 종목 전체
+    # KOSPI : KOSPI 종목
+    # KOSDAQ : KOSDAQ 종목
+    # KONEX : KONEX 종목
+    # NASDAQ : 나스닥 종목
+    # NYSE : 뉴욕증권거래소 종목
+    # SP500 : S&P500 종목
+  
+ 개별 종목 수집
+  .DataReader
+  
+웹 스크랩핑
+
+  패키지
+    requests
+    BeautifulSoup
+    
+    request 웹 페이지에 요청
+      headers 세팅 : 정상적인 웹 브라우저 행세
+      get / post
+      
+    결과 웹페이지 수신
+   
+    BeautifulSoup
+      html 태그 선택 가능
+      일정 태그만 선택해서 pandas.read_html 로 DataFrame 변환
+      
+ 
