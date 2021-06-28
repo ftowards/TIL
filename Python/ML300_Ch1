@@ -1,0 +1,88 @@
+분류 모형 : 의료데이터
+
+Confusion Matrix
+
+          결과
+  예측    T   N
+   T     TP  FP
+   N     FN  TN
+   
+  정밀도 Precision = TP / TP + TN  >> 내가 True 를 예측 시 옳을 확률
+  재현율 Recall = TP / TP + FN  >> 실제 True 중 얼마나 맞추었냐
+  
+  특이도 Specificity = TN / FP + TN  >> 정상인 사람이 음성 판정을 받을 확률
+  
+  정확도 Accuracy = TP + TN / TP + FP + FN + TN  
+  
+EDA
+  1. 데이터 분석
+     데이터 크기 / 유형 / 수치형&범주형 데이터
+     Null 여부
+     
+    - 시각화해서 살펴보기
+      수치형 데이터
+        * histplot ( kde option / hue / bins )
+          각 수치형 데이터 대비 타겟 데이터('DEATH_EVENT')
+      
+      범주형 데이터
+        * boxplot / swarmplot / violinplot
+        
+  2. 데이터 전처리
+    표준화 
+    from sklearn.preprocessing import StandardScaler
+    
+    수치형 데이터를 따로 구분
+     -----------------------------------------------
+     # 수치형 입력 데이터, 범주형 입력 데이터, 출력 데이터로 구분하기
+        X_num = df[['age','creatinine_phosphokinase', 'ejection_fraction','platelets', 'serum_creatinine', 'serum_sodium']]
+        X_cat = df[['anaemia','diabetes', 'high_blood_pressure','sex','smoking']]
+        y = df['DEATH_EVENT']
+
+      # 수치형 입력 데이터를 전처리하고 입력 데이터 통합하기
+        scaler = StandardScaler()
+        scaler.fit(X_num)
+        X_scaled = scaler.transform(X_num)
+        X_scaled = pd.DataFrame(data = X_scaled, index= X_num.index, columns=X_num.columns)
+        X = pd.concat([X_scaled, X_cat], axis = 1)
+     -----------------------------------------------
+     StandardScaler() 표준화 장치 세팅
+     fit() << 표준화할 컬럼 세팅
+     scaler.transform() >> pd.DataFrame 화
+     
+   3. 데이터 분할하기
+   
+    from sklearn.model_selection import train_test_split
+  
+    ## train_test_split() 함수 사용
+      X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3, random_state = 1)
+      
+   4. 분류
+   
+    logistic Regression / 로지스틱 회귀 모델
+    
+      from sklearn.linear_model import LogisticRegression
+
+        model_lr = LogisticRegression(max_iter = 1000)
+        model_lr.fit(X_train, y_train)
+
+      from sklearn.metrics import classification_report
+
+        # Predict를 수행하고 classification_report() 결과 출력하기
+        pred = model_lr.predict(X_test)
+        print(classification_report(y_test, pred))
+      
+    XGboost 
+      
+       from xgboost import XGBClassifier     
+     
+          # XGBClassifier 모델 생성/학습
+            model_xgb = XGBClassifier()
+            model_xgb.fit(X_train, y_train)
+    
+   5. 심화 분석
+   
+    - 정확도 / 재현율
+      
+    - ROC 커브
+    
+      민감도 / (1 - 특이도) 
