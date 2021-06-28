@@ -72,6 +72,8 @@ EDA
         print(classification_report(y_test, pred))
       
     XGboost 
+       XGBoost 간단 설명  https://bcho.tistory.com/1354
+        > 여러 개의 Decision Tree 모델의 Ensemble 모델 > Gradient 알고리즘 중 병렬처리
       
        from xgboost import XGBClassifier     
      
