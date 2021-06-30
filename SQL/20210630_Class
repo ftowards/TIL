@@ -1,0 +1,11 @@
+Sql 8차시
+
+sql >> 시각화
+
+  1. SQL Developer
+    보고서 기능
+  
+  2. Japplin
+    jdbc 로 연결
+    쿼리 마지막 ; 로 구분자 삭제 후 실행
+    table >> chart / graph 로 변환
