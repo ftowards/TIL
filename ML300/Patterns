@@ -1,0 +1,89 @@
+### **학습목표**
+
+- 각 모델들의 개괄적 이해 및 구축과정 학습.
+- 파라미터를 최적화 시키는 GridSearch에 대한 이해 및 코딩작업 체화.
+- 각 모델의 중요 파라미터에 대한 개괄적 이해.
+- 파라미터의 변화에 따른 예측력 변화 경향성 파악.
+- 최적의 모형 및 파라미터를 찾는 과정에 대한 계획 수립 및 수행.
+
+* 원 핫 인코딩 상태 >> 범주화
+
+ T / F 의 시리즈 리스트로 변환
+ > np.select( 변환한 시리즈 리스트, 범주화할 타겟 리스트(원핫 인코딩의 컬럼들))
+
+
+1. Logistic Regression
+
+from sklearn.linear_model import LogisticRegression
+from sklearn.model_selection import GridSearchCV
+from sklearn.metrics import confusion_matrix
+from sklearn import metrics
+
+# (문제) 로지스틱 회귀분석 모형을 만들어 lm에 저장합니다. solver는 'liblinear'로 설정합니다.
+
+lm = LogisticRegression(solver = 'liblinear')
+
+    solver{‘newton-cg’, ‘lbfgs’, ‘liblinear’, ‘sag’, ‘saga’}, default=’lbfgs’
+    Algorithm to use in the optimization problem.
+
+    For small datasets, ‘liblinear’ is a good choice, whereas ‘sag’ and ‘saga’ are faster for large ones.
+
+    For multiclass problems, only ‘newton-cg’, ‘sag’, ‘saga’ and ‘lbfgs’ handle multinomial loss; ‘liblinear’ is limited to one-versus-rest schemes.
+
+    ‘newton-cg’, ‘lbfgs’, ‘sag’ and ‘saga’ handle L2 or no penalty
+    ‘liblinear’ and ‘saga’ also handle L1 penalty
+    ‘saga’ also supports ‘elasticnet’ penalty
+    ‘liblinear’ does not support setting penalty='none'
+
+    출처 : https://scikit-learn.org/stable/modules/generated/sklearn.linear_model.LogisticRegression.html
+
+### 문제 10. [로지스틱 회귀분석] Grid Search 구축 (Lidge, Lasso Penalty / Threshold)
+
+# (문제) 로지스틱에서 고려해야할 Penalty의 형태 (Ridge, Lasso), regularization parameter range를 설정하여 이를 parameters에 dictionary 형태로 저장합니다.
+parameters = {'penalty' :['l1','l2'],
+              'C': [0.01,0.1,0.5,0.9,1,5,10], 'tol' : [1e-4, 1e-6, 1, 1e2]}
+    
+    모델의 과적합을 방지하기 위해 모델을 정규화(일반화 시키는 방법)
+    
+    Lasso L1 Regulazation
+      변수의 갯수를 조절하여 축소할 수 있다.
+      중요성이 떨어지는 변수 먼저 조정하고, 변수 간 상관관계가 높으면 성능이 떨어진다.
+      
+    Ridge L2 Regulazation
+      변수의 중요성을 조절하여 일반화
+      중요성이 높은 변수를 먼저 조정하고, 변수 간 상관성이 높아서 모델의 성능이 떨어지지 않는다.
+    
+
+# (문제) sklearn.model_selection.GridSearchCV를 활용해 cv값 10, n_jobs값은 n_thread로, scoreing은 "accuracy"로 Grid Search를 세팅하고 이를 GSLR에 저장합니다.
+GSLR = GridSearchCV(lm, parameters, cv=10, n_jobs=n_thread, scoring ='accuracy')
+
+    출처 : https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.GridSearchCV.html#sklearn.model_selection.GridSearchCV
+
+# (문제) Grid Search를 fit함수를 활용하여 수행합니다.
+GSLR.fit(X_train, y_train)
+
+# 최적의 파라미터 값 및 정확도 (Accuracy) 출력
+print('final params', GSLR.best_params_)   
+print('best score', GSLR.best_score_)  
+
+### 문제 11. [로지스틱 회귀분석] 모형 평가 및 최적 로지스틱 모형 구축
+
+# (문제) predict 함수를 활용하여 예측 값을 구해 이를 predicted 에 저장합니다.
+predicted = GSLR.predict(X_test)
+
+# (문제) sklearn.metrics.confusion_matrix 활용하여 confusion_matrix를 구하고 이를 출력합니다.
+
+CMatrix = confusion_matrix(y_test, predicted)
+print(CMatrix)
+print("Accuacy : ", GSLR.score(X_test, y_test))
+
+# (문제) sklearn.metrics.classification_report를 활용하여 report를 출력합니다.
+print(metrics.classification_report(y_test, predicted))
+
+# Cross validation 과정에서 계산된 정확도 값들을 출력해줍니다.
+means = GSLR.cv_results_['mean_test_score']
+stds = GSLR.cv_results_['std_test_score']
+for mean, std, params in zip(means, stds, GSLR.cv_results_['params']):
+    print("%0.3f (+/-%0.03f) for %r"
+          % (mean, std * 2, params))
+print()
