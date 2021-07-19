@@ -87,3 +87,43 @@ for mean, std, params in zip(means, stds, GSLR.cv_results_['params']):
     print("%0.3f (+/-%0.03f) for %r"
           % (mean, std * 2, params))
 print()
+
+
+
+2. 의사 결정 나무
+
+ 의사결정나무에서 고려해야할 criterion, min_samples_split, max_depth, min_samples_leaf, max_features
+  criterion : measure 선택
+  min_sample_split / max_dapth / min_samples_leaf / max_features : 모델 복잡도에 연관
+  모델 복잡성을 낮추는 과정 >> Prooning
+  
+  
+ 3. Random Forest
+ 
+  - Random Forest는 아래의 Bagging과 Drop-out을 활용하여 의사결정나무의 변동성을 완화시키고 예측력을 높인 모델이다.
+  - Bootstrapping: 복원추출을 통하여 샘플 구성이 조금씩 다른 여러 데이터셋을 생성해냄.
+  - Aggregating: 여러 모형의 결과를 통합하여 모형의 변동성을 낮춤.
+  - Drop-out: Tree를 구성할 때 변수를 일부 탈락시킴. Tree간의 correlation을 감소시켜 이 또한 모형의 변동성을 낮춤.
+  
+  decision tree 를 결합하여 예측력을 높혔지만, 해석력은 떨어짐
+  여러 모델을 결합하였기 때문에 명확하게 결과에 대한 해석을 내놓기 어려울 수 있음
+  
+ 4. SVM
+  
+  서포트 벡터 머신
+  
+ 
+ 5. 인공신경망
+ 
+   신경망 모형은 위와 같이 입력 데이터를 종합하여 결과값을 내는 구조를 가진 Perceptron을 중첩시키고 혼합시킨 구조이다. 
+   아래와 같이 두 부분으로 나누어볼 수 있다.
+
+   입력값들의 선형합 구조인 transfer function
+   activation function f()
+
+   이 때 입력값은 다른 perceptron의 출력값이 될 수 있으며 이것이 중첩되면 아래와 같이 나타날 수 있으며 이를 신경망 모형이라 한다.
+    Input Layer: 입력 데이터가 위치하는 layer.
+    Hidden Layer: 입력 데이터 혹은 또 다른 hidden layer의 출력값을 입력값으로 하는 perceptron이 위치하는 layer.
+    Output Layer:마지막 hidden layer의 출력값을 입력값고 출력함수의 결과를 얻은 노드로 구성된 layer.
+  
+  
