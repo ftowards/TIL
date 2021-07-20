@@ -126,4 +126,14 @@ print()
     Hidden Layer: 입력 데이터 혹은 또 다른 hidden layer의 출력값을 입력값으로 하는 perceptron이 위치하는 layer.
     Output Layer:마지막 hidden layer의 출력값을 입력값고 출력함수의 결과를 얻은 노드로 구성된 layer.
   
-  
+ 
+ 6. Boosting
+ 
+   학습 데이터에서 여러 번 분류
+   오분류 된 데이터에 가중치를 더 주고 반복함으로써 보다 적합한 결과들을 도출하고
+   그 결과들을 결합하여 모델을 형성
+   
+   
+ 
+ 
+ 
